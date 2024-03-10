@@ -8,10 +8,17 @@
 .wave-header{
     min-height: 100vh;
     width: 100%;
-    background: #2eaa8f;
+    background: #19a788;
     position: relative;
 }
 
+h3{
+    padding-top:15px;
+    padding-left:15px;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
 
 svg{
     position: absolute;
