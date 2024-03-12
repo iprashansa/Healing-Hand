@@ -46,33 +46,33 @@
                     <h2 style="padding-top: 10px;"> Create Account</h2>
                     <p>Or use your email for registration</p>
 
-                    <form action="#">
+                    <form action="/docHome" method="post">
                         <div class="input-field">
                             <label for="username">
-                                <input type="text" name="#" id="username" placeholder="Name">
+                                <input type="text" name="name" id="username" placeholder="Name">
                             </label>
                         </div>
                         <div class="input-field">
                             <label for="Doctors's ID">
-                                <input type="text" name="#" id="Doctors's ID" placeholder="Doctors's ID">
+                                <input type="text" name="docId" id="Doctors's ID" placeholder="Doctors's ID">
                             </label>
                         </div>
 
                         <div class="input-field">
-                            <label for="Email"><input type="email" name="#" id="Email" placeholder="Email"></label>
+                            <label for="Email"><input type="email" name="email" id="Email" placeholder="Email"></label>
                         </div>
                         <div class="input-field">
                             <label for="phonenumber">
-                                <input type="text" name="#" id="phonenumber" placeholder="Phone Number">
+                                <input type="text" name="phoneNumber" id="phonenumber" placeholder="Phone Number">
                             </label>
                         </div>
 
                         <div class="input-field">
-                            <label for="Password"> <input type="password" name="#" id="Password" placeholder="Password"></label>
+                            <label for="Password"> <input type="password" name="password" id="Password" placeholder="Password"></label>
                         </div>
 
                         <div class="input-field">
-                            <input type="submit" value="register">
+                            <a href="/docHome"><button class="btn">Register</button></a>
                         </div>
                     </form>
 

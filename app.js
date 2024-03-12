@@ -6,6 +6,7 @@ const mainPage = require('./routes/index');
 const doctorRoutes = require('./routes/doctorSignUp');
 const patientRoutes = require('./routes/patientSignUp');
 const patientHome = require('./routes/patientHome');
+const docHome = require('./routes/docHome');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -19,6 +20,7 @@ app.use('/',mainPage);
 app.use('/', doctorRoutes);
 app.use('/', patientRoutes);
 app.use('/',patientHome);
+app.use('/',docHome);
 
  app.listen(3000,function(){
     console.log("server is running so beautifully");
