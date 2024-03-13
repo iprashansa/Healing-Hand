@@ -113,7 +113,14 @@ margin-right: 30px;
 .margin{
     margin-top: 75px;
 }
-
+.margin a{
+    text-decoration: none;
+    color: #ffffff;
+}
+.margin a:hover{
+    color: black;
+    font-weight: 500px;
+}
 
 
 
@@ -161,9 +168,10 @@ color: aliceblue;}
                 margin-top: 130px;
                 height: 110px;
                 width: 110px;
-                /* background-color: #a51212; */
+    
                 border-radius: 50%;
-                display: inline-block;
+                display: flex;
+                justify-content: space-evenly;
                 border: 1.5px solid black;
             
               
@@ -179,33 +187,46 @@ color: aliceblue;}
 
             display: flex;
             align-items: center;
+         
             justify-content: space-evenly;
         }
+
+   
+
+
+
+
+
+
         .second-middle {
             margin-top: 20px;
             display: flex;
             align-items: center;
             justify-content: space-evenly;
-           margin-left: 40px;
         }
 
    
         .name{
 
             font-size: 22px;
+      
             display: flex;
+            align-items: center;
             justify-content: space-evenly;
         
        
         }
-    
-        
-        .records{
-            margin-left: 90px;
+
+     
+
+
+
+
+        .aa a{
+            text-decoration: none;
         }
-        .bookedappo a{
-            margin-left:80px ;
-        }
+
+
 
     
 
@@ -237,9 +258,12 @@ color: aliceblue;}
 
     }
 
-    .footer2 p{
+    .footer2 a{
         color: #999999;
-        font-size: 13px;
+        font-size: 16px;
+        text-decoration: none;
+        
+ 
     }
 
 
