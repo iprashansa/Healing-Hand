@@ -1,0 +1,265 @@
+
+*{
+    margin: 0;
+    font-family: Arial;
+    border: border-box;
+}
+
+    
+
+
+
+
+.navbar1{
+    
+    height: 30vh;
+    background-color:#40A2E3;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  
+}
+
+.name{
+font-size: 1.8rem;
+font-family: sans-serif;
+font-style: inherit;
+margin-bottom: 80px;
+margin-right: 30px;
+}
+
+.search{
+    display: flex;
+    justify-content:space-evenly ;
+    /* background-color: pink; */
+    width: 35vw;                        
+    height: 5vh;                          
+    border-radius: 4px;
+   
+}
+.search:hover{
+    border: 2px solid rgba(12, 1, 2, 0.603);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.search-select{
+    background-color: #f3f3f3;
+    width: 50px;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border: none;
+
+}
+
+.search-input {
+   
+    width: 100%;
+    font-size: 1rem;
+    border:none;
+    font-size: 17px;
+ 
+}
+
+.search-icon{
+
+    width: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    background-color: aquamarine;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color:#0f1111
+
+    
+
+
+}
+
+
+.home{
+     font-size: 1.2rem;
+}
+
+.about{
+    font-size: 1.2rem;
+}
+.Emergency{    font-size: 1.2rem;
+}
+
+
+.faq{
+    font-size: 1.2rem;
+}
+.noti{
+ 
+ font-size: 20px;
+
+
+}
+
+.margin{
+    margin-top: 75px;
+}
+
+
+
+    @media(max-width: 768px) {
+
+
+
+        .navbar1 {
+          
+            height:15vh; 
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;}
+
+        }
+
+    /* profile container box */
+   
+    
+    /* .midcontainer {
+        
+        height: 100%;
+        margin: 0;
+        display: flex;
+       
+    }
+     */
+    .box {
+        width: 75%;
+        height: 400px;
+        background-color: #FFF6E9 C;
+        border: 2px solid #BBE2EC;
+        padding: 20px;
+        margin: 7.5%;
+        position: relative;
+        /* align-items: center;
+        justify-content: center; */
+        text-align: center;
+        
+    }
+    
+    .section {
+        flex: 1;
+        margin: 10px;
+        padding: 10px;
+        text-align: left;
+    }
+    
+    .section h3 {
+        margin-top: 0;
+    }
+
+    
+    
+    #profilePicPreview {
+        width: 100px; /* Adjust width as needed */
+        height: 100px; /* Adjust height as needed */
+        border-radius: 50%; /* Make it circular */
+        object-fit: cover; /* Maintain aspect ratio */
+        border: 2px solid #333; /* Add border */
+    }
+
+
+/* .box .c1{
+    position: relative;
+}    
+.c1{
+    height: 400px;
+    width: 33%;
+    background-color: #0f1111;
+    display: inline-block;
+    
+}
+.c2{
+    height: 400px;
+    width: 33%;
+    background-color: aqua;
+    display: inline-block;
+}
+.c3{
+    height: 400px;
+    width: 33%;
+    background-color: #7a0b46;
+    display: inline-block;
+} */
+
+.box .c1{
+    position: relative;
+    width: 33%;
+    height: 400px;
+    /* background: #00f; */
+    float: left;
+    border: 2px solid #BBE2EC;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+
+
+
+}
+.box .c2{
+    position: relative;
+    width: 33%;
+    height: 270px;
+    /* background: rgb(90, 195, 160); */
+    float: left;
+    border: 2px solid #BBE2EC;
+    box-sizing: border-box;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.box .c3{
+    position: relative;
+    width: 33%;
+    height: 270px;
+    /* background: #00f; */
+    float: left;
+    border: 2px solid #BBE2EC;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.box .c4{
+    position: relative;
+    width: 66%;
+    height: 130px;
+    /* background: rgb(90, 195, 160); */
+    float: left;
+    border: 2px solid #BBE2EC;
+    box-sizing: border-box;
+    
+}
+.input-field{
+    width: 100%;
+    font-size: 17px;
+    margin: .7rem 0;
+    border: none;
+    /* background-color: #e8e8e8; */
+    padding: 1rem 1.8rem;
+    letter-spacing: 0.6rem;
+    border-radius: 5px; 
+}
+
+.c4 .input-field{
+    height: 100px;
+    
+}
+
+ 
