@@ -6,12 +6,12 @@ router.get('/doctorSignUp', (req, res) => {
     res.render('docs_register');
 });
 
-router.post('/docHome',async function(req,res){
+router.post('/doctorSignUp',async function(req,res){
     try {
         const {name,docId,email,phoneNumber,password} = req.body;
         const newDoc = new DocRegister({name,docId,email,phoneNumber,password});
         await newDoc.save();
-        res.redirect('docHome');
+        res.redirect('/doctor/docHome');
     } catch (error) {
         res.status(400).send(error.message);
     }

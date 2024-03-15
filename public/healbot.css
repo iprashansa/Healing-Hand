@@ -1,0 +1,147 @@
+*{
+    color:#40a2e3;
+    font-family: sans-serif;
+}
+
+body{
+    margin:0;
+    padding:0;
+    background-color:white;
+    display:flex;
+}  
+
+h1{
+    font-size:33px;
+    font-weight:600 ;
+    padding:200px 0;
+    align-items: center;
+    text-align: center;
+}
+
+
+.side-bar{
+    background-color: #bbe2ec;
+    width:244px;
+    height:100vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+     
+}
+
+.bottom-section{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    
+
+}
+.input-container{
+    width:100%;
+    max-width: 1000px;
+    position:fixed;
+    margin-bottom: 60px;
+ 
+    
+
+}
+
+.input-container #submit {
+    position: absolute;
+    right:0;
+    bottom:15px;
+    cursor: pointer;
+    color: black;
+}
+
+.input:focus{
+    outline:none;
+}
+
+#output {
+    height: calc(100% - 40px); 
+    overflow-y: auto; 
+    overflow-x: auto;
+    padding:50px;
+    width:1000px;
+}
+
+.main {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    height: 100vh;
+    width:100% ;
+    padding-left:90px;
+    
+}
+
+#HealBot{
+    text-align: center;
+}
+
+input{
+    border:none;
+    background-color:#40a2e3 ;
+    width: 100%;
+    font-size:20px;
+    padding: 12px 15px;
+    border-radius:5px;
+    box-shadow: white 0 54px 55px;
+    color:white;
+}
+
+.message {
+    margin-bottom: 10px;
+    clear: both; 
+}
+
+.user-message {
+    float: right;
+    background-color: #4CAF50; 
+    color: white;
+    padding: 10px; 
+    border-radius: 10px; 
+}
+
+.bot-message {
+    float: left; 
+    background-color: #008CBA; 
+    color: white; 
+    padding: 10px; 
+    border-radius: 10px; 
+    width: 600px;
+}
+
+
+
+button{
+    border:solid 0.5px ;
+    border-radius:5px;
+    padding: 10px;
+    margin:10px;
+    cursor: pointer;
+}
+
+nav{
+    border-top:solid 0.5px;
+    padding: 10px;
+    margin:10px;
+
+}
+.history{
+    padding: 10px;
+    margin:10px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.history p{
+    cursor:pointer;
+}
