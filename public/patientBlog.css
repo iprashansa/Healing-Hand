@@ -46,7 +46,7 @@ margin-right: 30px;
     margin-left: 300px;
     font-size: 40px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: greenyellow;
+    color: white;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -71,7 +71,7 @@ margin-right: 30px;
     
 }
 .kk a:hover{
-    color:  greenyellow;
+    color:  white;
     font-weight: 530;
 }
 .margin{
@@ -177,7 +177,7 @@ margin-right: 30px;
 .ap a{ 
     font-size: 16px;
     text-decoration: none;
-    color: blue;
+    color:white;
     font-weight: 550;
 }
 
