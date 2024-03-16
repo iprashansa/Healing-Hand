@@ -1,18 +1,19 @@
 const express = require('express');
 const router = express.Router();
+const bodyParser = require("body-parser");
 const OpenAI = require('openai');
-const path = require('path');
 
+router.use(bodyParser.urlencoded({extended:true}));
 const openai = new OpenAI({ apiKey: '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' });
-router.get('/', (req , res) => {
+router.get('/patient/healbot', (req , res) => {
     res.render('healbot');
 });
 
 
-router.post('/', async (req, res) => {
+router.post('/patient/healbot', async (req, res) => {
     try {
         const { messages } = req.body;
-
+        console.log('Received messages:', messages);
         // it is used to generate response
         const completion = await openai.chat.completions.create({
             messages,
@@ -27,13 +28,6 @@ router.post('/', async (req, res) => {
     }
 });
 
-
-
-
-// User side JavaScript 
-router.get('/healbot.js', (req, res) => {
-    res.sendFile(__dirname +'/public/healbot.js');
-});
 
 
 module.exports = router;
