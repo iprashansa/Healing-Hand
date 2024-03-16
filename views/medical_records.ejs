@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medical Record</title>
     <link rel="stylesheet" href="/medical_record.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https:://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    
 </head>
 <body>
     <div class="mid-container">
         <header>Medical Record </header>
-            <form action="#">
+            <form action="/patient/records" method="post">
+                <div class="edit">
+                   <a href="/patient/records"><div id="submit">&#x270E Edit</div></a>
+                </div>
                 <div class="form first">
                     <div class="general-info">
                         <span class="title"> General Information</span>
@@ -19,15 +22,15 @@
                         <div class="fields">
                             <div class="input-field">
                                 <label for="height">Your height in meters</label>
-                                <input type="number" placeholder="Height">
+                                <input type="number" placeholder="Height" name="height">
                             </div>
                             <div class="input-field">
                                 <label for="weight">Your weight in kilograms</label>
-                                <input type="number" placeholder="Weight">
+                                <input type="number" placeholder="Weight" name="weight">
                             </div>
                             <div class="input-field">
                                 <label for="BMI"> BMI</label>
-                                <input type="number" placeholder="BMI">  
+                                <input type="number" placeholder="BMI" name="BMI">  
                             </div>
 
 
@@ -36,39 +39,45 @@
 
                             <div class="input-field-docs">
                                 <label for="Blood Report">Your blood report file</label>
-                                <input type="file" class="docs-input-button" placeholder="Blood Report">
+                                <input type="file" class="docs-input-button" placeholder="Blood Report" name="bloodReport">
                             </div>
                             <div class="input-field">
                                 <label for="yesNoSelect">Insurance</label>
-                                <select id="yesNoSelect" name="yesNo">
+                                <select id="yesNoSelect" name="insurance">
                                     <option value="yes">Yes</option>
                                     <option value="no">No</option>
                                 </select>
                             </div>
                             <div class="input-field-docs">
                                 <label for="Blood Report">Your insurance file</label>
-                                <input type="file" class="docs-input-button" placeholder="Insurance File">
+                                <input type="file" class="docs-input-button" placeholder="Insurance File" name="insuranceFile">
                             </div>
                             <!-- /3rd row -->
                             <div class="input-field">
                                 <label for="yesNoSelect">Married</label>
-                                <select id="yesNoSelect" name="yesNo">
+                                <select id="yesNoSelect" name="married">
                                     <option value="yes">Yes</option>
                                     <option value="no">No</option>
                                 </select>
                             </div>
                             <div class="input-field">
                                 <label for="yesNoSelect">Consanguineous(Whether married within relatives)</label>
-                                <select id="yesNoSelect" name="Whether married within relatives">
+                                <select id="yesNoSelect" name="consanguineous">
                                     <option value="yes">Yes</option>
                                     <option value="no">No</option>
                                 </select>
                             </div>
                             <div class="input-field">
-                                <label for="yesNoSelect">Insurance</label>
-                                <select id="yesNoSelect" name="yesNo">
-                                    <option value="yes">Yes</option>
-                                    <option value="no">No</option>
+                                <label for="yesNoSelect">Blood Group</label>
+                                <select id="yesNoSelect" name="bloodGroup">
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
                                 </select>
                             </div>
                         </div>
@@ -80,21 +89,21 @@
                         <div class="fields">
                             <div class="input-field">
                                 <label for="yesNoSelect">Diet</label>
-                                <select id="yesNoSelect" name="yesNo">
-                                    <option value="yes">Veg</option>
-                                    <option value="no">Non Veg</option>
+                                <select id="yesNoSelect" name="diet">
+                                    <option value="Veg">Veg</option>
+                                    <option value="Non Veg">Non Veg</option>
                                 </select>
                             </div>
                             <div class="input-field">
                                 <label for="yesNoSelect">Smoking</label>
-                                <select id="yesNoSelect" name="yesNo">
+                                <select id="yesNoSelect" name="smoking">
                                     <option value="yes">Yes</option>
                                     <option value="no">No</option>
                                 </select>
                             </div>
                             <div class="input-field">
                                 <label for="yesNoSelect">Drinking</label>
-                                <select id="yesNoSelect" name="yesNo">
+                                <select id="yesNoSelect" name="drinking">
                                     <option value="yes">Yes</option>
                                     <option value="no">No</option>
                                 </select>
@@ -109,38 +118,62 @@
                         <div class="fields">
                             <div class="input-field">
                                 <label for="past diseases">Past diseases and medical condition</label>
-                                <input type="text" placeholder="Past Diseases">
+                                <input type="text" placeholder="Past Diseases" name="pastDiseases">
                             </div>
                             <div class="input-field-docs">
                                 <label for=" past diseases report">Your past diseases report</label>
-                                <input type="file" class="docs-input-button" placeholder="past diseases report">
+                                <input type="file" class="docs-input-button" placeholder="past diseases report" name="pastDiseasesReport">
                             </div>
                             <div class="input-field">
                                 <label for="family medical condition">Family history of medical condition</label>
-                                <input type="text" placeholder="family medical condition Diseases">
+                                <input type="text" placeholder="family medical condition Diseases" name="familyMedicalCondition">
                             </div>
                             <div class="input-field">
                                 <label for="present medical condition">Present medical condition</label>
-                                <input type="text" placeholder="Present  Diseases">
+                                <input type="text" placeholder="Present  Diseases" name="presentMedicalCondition">
                             </div>
                             <div class="input-field">
                                 <label for="present medical condition">Present medical symptoms</label>
-                                <input type="text" placeholder="Symptoms ">
+                                <input type="text" placeholder="Symptoms" name="medicalSymptoms">
                             </div>
                             <div class="input-field-docs">
                                 <label for="Present medical report">Present medical report</label>
-                                <input type="file" class="docs-input-button" placeholder="Present medical report File">
+                                <input type="file" class="docs-input-button" placeholder="Present medical report File" name="presentMedicalReport">
                             </div>
-                            
-                            
-
-
-                            
                         </div>
                     </div>
+                    <div class="submit">
+                        <button type="submit" class="btn">Submit</button>
+                    </div>
                  </form> 
+                </div>
 
-
-                 </div>
+                <script>
+                function calculateBMI() {
+                    var height = parseFloat(document.getElementById('height').value);
+                    var weight = parseFloat(document.getElementById('weight').value);
+                    var bmi = weight / (height * height);
+                    if (!isNaN(bmi)) {
+                        document.getElementById('bmi').value = bmi.toFixed(2);
+                    } else {
+                        document.getElementById('bmi').value = '';
+                    }
+                }
+        
+                // Function to toggle form fields and submit button between editable and non-editable states
+                function toggleEdit() {
+                    var inputs = document.querySelectorAll('input');
+                    var submitButton = document.getElementById('submitButton');
+                    for (var i = 0; i < inputs.length; i++) {
+                        inputs[i].readOnly = !inputs[i].readOnly;
+                    }
+                    submitButton.disabled = !submitButton.disabled;
+                }
+        
+                // Event listeners to calculate BMI when height or weight changes
+                document.getElementById('height').addEventListener('input', calculateBMI);
+                document.getElementById('weight').addEventListener('input', calculateBMI);
+            </script>
+                 
 </body>
 </html>

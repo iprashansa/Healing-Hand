@@ -67,6 +67,7 @@ h1{
     overflow-x: auto;
     padding:50px;
     width:1000px;
+    padding-bottom: 100px;
 }
 
 .main {
@@ -117,8 +118,6 @@ input{
     border-radius: 10px; 
     width: 600px;
 }
-
-
 
 button{
     border:solid 0.5px ;

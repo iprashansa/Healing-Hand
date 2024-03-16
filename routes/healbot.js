@@ -3,8 +3,13 @@ const router = express.Router();
 const bodyParser = require("body-parser");
 const OpenAI = require('openai');
 
+require('dotenv').config();
+
+
 router.use(bodyParser.urlencoded({extended:true}));
-const openai = new OpenAI({ apiKey: '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' });
+router.use(bodyParser.json());
+
+const openai = new OpenAI({ apiKey:  process.env.OPENAI_API_KEY });
 router.get('/patient/healbot', (req , res) => {
     res.render('healbot');
 });
@@ -27,7 +32,5 @@ router.post('/patient/healbot', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
-
-
 
 module.exports = router;

@@ -61,6 +61,34 @@ box-shadow: 0 5px 10px rgba(0,0,0,0.1);
     margin-bottom: 8px;
 }
 
+.submit{
+    text-align:center;
+    align-items: center;
+}
+
+#submit{
+    padding-left:90%;
+    font-size:large;
+    font-family:"Montserrat", sans-serif;
+    font-optical-sizing: auto;
+}
+
+/* .edit{
+    margin-bottom: 80px;
+} */
+
+.btn{
+    text-align:center;
+    align-items: center;
+    color:white;
+    background-color:#40A2E3;
+    border:none;
+    height: 40px;
+    width:100px;
+    font-size: large;
+       
+}
+
 .mid-container form .fields{
     display: flex;
     align-items: center;
