@@ -1,117 +1,358 @@
-       *{
-        margin: 0;
-        font-family: Arial;
-        border: border-box;
-        }
 
-         #title {
-            background-color:#0D9276;
-            height:500px;
-            width:100%;
-        }
+*{
+    margin: 0;
+    font-family: Arial;
+    border: border-box;
+}
+
+.navbar1{
+    
+    height: 30vh;
+    background-color:#0D9276;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  
+}
+
+.name{
+font-size: 1.8rem;
+font-family: sans-serif;
+font-style: inherit;
+margin-bottom: 80px;
+margin-right: 30px;
+}
+
+.search{
+    display: flex;
+    justify-content:space-evenly ;
+    /* background-color: pink; */
+    width: 35vw;                        
+    height: 5vh;                          
+    border-radius: 4px;
+   
+}
+.search:hover{
+    border: 2px solid rgba(12, 1, 2, 0.603);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.search-select{
+    background-color: #f3f3f3;
+    width: 50px;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border: none;
+
+}
+
+.search-input{
+   
+    width: 100%;
+    font-size: 1rem;
+    border:none;
+    font-size: 17px;
+ 
+}
+
+.search-icon{
+
+    width: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    background-color: aquamarine;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color:#0f1111
+
+    
+
+
+}
+/* .search-icon{
+ 
+ 
+    background-color:white;
+    width: 70px;
+    height: 40px;
+
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+} */
+
+
+
+.home{
+     font-size: 1.2rem;
+}
+
+.about{
+    font-size: 1.2rem;
+}
+.Emergency{    font-size: 1.2rem;
+}
+
+
+.faq{
+    font-size: 1.2rem;
+}
+.noti{
+ 
+ font-size: 20px;
+
+
+}
+
+.margin{
+    margin-top: 75px;
+}
+.margin a{
+    text-decoration: none;
+    color: #ffffff;
+}
+.margin a:hover{
+    color: black;
+    font-weight: 500px;
+}
+
+
+
+.main{
         
-        .img{
-            margin-left:110px;
-            margin-top:50px;
-            width:350px;
-            height:300px;
-        }
+    height: 350px;
+    background-color:#0D9276;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
 
-        .row{
+.line{
+    font-size: 2.2rem;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-style: inherit;
+color: aliceblue;}
+
+    .line p{
+        font-size: 1.1rem;
+   font-family: Arial, Helvetica, sans-serif;
+        font-style: inherit;
+        color: #FFF6E9;}
+
+
+
+
+    .image1{
+        height: 41vh;
+        width: 30vw;
+     
+        /* display: inline-block; */
+        background-size: cover;
+       }
+
+       .middle-container{
+        background-color: white;
+        /* height: 500px; */
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+      
+    }
+    .round{
+            margin-top: 130px;
+            height: 110px;
+            width: 110px;
+
+            border-radius: 50%;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
+            justify-content: space-evenly;
+            border: 1.5px solid black;
+        
+          
+    }
+    .first-middle {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+    .first-middle .name a{
+        text-decoration: none;
+        color: #551A8B;
+    }
 
 
-        
-        .navbar-brand{
-            font-family: "Montserrat", sans-serif;
-            font-size: medium;
-            color:white solid 1px;
-        }
 
-        #nav-item{
-            margin-left:60px;
-        }
-        
-        
-        h1{
-           font-family: 'Montserrat', sans-serif;
-           color:#fff;
-           size:2.03rem;
-           line-height:1.5;
-        }
-        
-        h2{
-            font-family:'Montserrat', sans-serif;
-            line-height:1.5;
-            size:2.03rem;
-            padding:3% 15%;
-        }
-        
-        h3{
-            font-family: 'Montserrat', sans-serif;
-            font-size:2.03rem;
-        }
-        
-        .container-fluid{
-             padding:3% 15%;
-        }
-        
-        .easy{
-            margin:auto;
-            flex: 0 0 calc(33.333% - 15px); 
-            margin-bottom: 15px;
-        }
-        .icon{
-            margin-bottom:1rem;
-        }
-        
-        #features{
-            padding:7% 15%;
-            text-align:center;
-            padding:5%;
-        }
-        
-        
-        .press{
-            background-color: #dbc1ac;
-            text-align:center;
-            padding:3%;
-        }
-        
-        .press-icon{
-            width:15%;
-            margin:20px 20px 50px;
-        }
-        
+
+    .third-container{
+
+     
+        /* align-items: center; */
+ 
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        /* gap:20px */
+    }
+
+    /* .circle5 .round {
+        margin-left: 150px;
+    } */
+
+
+
+
+
+
+
+
+
+    .second-middle {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+
+    .name{
+
+        font-size: 22px;
+  
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    
+   
+    }
+
+ 
+
+
+
+
+    .aa a{
+        text-decoration: none;
+        margin-left: 90px;
+    }
+
+
+
+
+
+   .image{
+    height: 109px;
+    width: 109px;
+    border-radius: 50%;
+    /* display: inline-block; */
+    background-size: cover;
+   }
+
+
+      
+
+    .footer2{
        
-        @media(max-width:768px){
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-content: space-evenly;
+        background-color: #183153;
+        color: #FFFFFF;
+        font-size: 14px;
+        font-family: sans-serif;
+        height: 250px;
 
-            #title{
-                height:1000px;
-                background-color:#0D9276;
 
-            }
-            .img{
-                height:300px;
-                width:400px;
-                padding-bottom:50px;
-                padding-left: 50px;
-                padding-right:50px;
-                margin:auto;
 
-                
-            }
-            .easy {
-                flex: 0 0 calc(50% - 15px); /* Two features in one row for screens smaller than 768px */
-            }
-            .row{
-                text-align:center;
-            }
-           
-        }
+    }
+
+    .footer2 a{
+        color: #999999;
+        font-size: 16px;
+        text-decoration: none;
         
+ 
+    }
+
+
+    @media(max-width: 768px) {
+
+
+
+        .navbar1 {
+          
+            height:15vh; 
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;}
+
+         .main{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            
+         }
+
+         .line{
+
+            font-size: 1.5rem;
+            margin-right: 40px;
+         }
+         .line h4{
+            display: flex;
+            justify-content: center;
+            margin-right: 50px;
+            margin-top: 10px;
+            font-size: 25px;
+          
+         }
+         .line p{
+            /* margin-right: 80px; */
+            margin-top: 18px;
+            font-size: 19px;
+            margin-right: 20px;
+         
+           
+         }
+         .image1{
+
+            height: 190px;
+            width: 360px;
+            display: flex;
+            justify-content: center;
+            margin-right: 60px;
+            margin-bottom: 10px;
+         }
+          .round{
+            height: 90px;
+            width: 90px;
+            margin-right: 76px;
+
+
+          }
+          .image{
+            height: 90px;
+            width: 90px;
+          }
+          .name{
+            font-size: 18px;
+            margin-right: 90px;
+            display: flex;
+            justify-content: space-evenly;
+            gap:20px;
+          }
+          
+         
+
+    }
+
+
         
         
