@@ -21,4 +21,30 @@ router.post("/patientSignUp",async function(req,res){
    
 })
 
+router.post('/login', async function(req, res) {
+    try {
+        const { email, password } = req.body;
+
+        const patient = await PatientRegister.findOne({ email });
+
+        if (!patient) {
+            // If patient not found, return an error
+            console.log('Invalid credentials');
+            return res.status(400).send('Invalid credentials');
+        }
+        const isPasswordValid = await bcrypt.compare(password, patient.password);
+        if (!isPasswordValid) {
+            // If password doesn't match, return an error
+            console.log('Invalid credentials');
+            return res.status(400).send('Invalid credentials');
+        }
+        
+        console.log('Login successful');
+        res.redirect('/doctor/docHome');
+    } catch (error) {
+        console.error('Error during login:', error);
+        res.status(500).send(error.message);
+    }
+});
+
 module.exports = router;
