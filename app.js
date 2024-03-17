@@ -22,6 +22,7 @@ const patientHealbot = require('./routes/healbot');
 const patientRecords = require('./routes/patientRecords');
 
 
+
 app.use('/',mainPage);
 app.use('/doctor', doctorRoutes);
 app.use('/patient', patientRoutes);
@@ -31,6 +32,7 @@ app.use('/patient/profile',patientProfile);
 app.use('/patient/blog',patientBlog);
 app.use('/',patientHealbot);
 app.use('/patient/records',patientRecords);
+
 
 
 

@@ -11,7 +11,7 @@
 <body>
     <div class="mid-container">
         <header>Medical Record </header>
-            <form action="/patient/records" method="post">
+            <form action="/patient/records" method="post" >
                 <div class="edit">
                    <a href="/patient/records"><div id="submit">&#x270E Edit</div></a>
                 </div>
@@ -148,32 +148,7 @@
                  </form> 
                 </div>
 
-                <script>
-                function calculateBMI() {
-                    var height = parseFloat(document.getElementById('height').value);
-                    var weight = parseFloat(document.getElementById('weight').value);
-                    var bmi = weight / (height * height);
-                    if (!isNaN(bmi)) {
-                        document.getElementById('bmi').value = bmi.toFixed(2);
-                    } else {
-                        document.getElementById('bmi').value = '';
-                    }
-                }
-        
-                // Function to toggle form fields and submit button between editable and non-editable states
-                function toggleEdit() {
-                    var inputs = document.querySelectorAll('input');
-                    var submitButton = document.getElementById('submitButton');
-                    for (var i = 0; i < inputs.length; i++) {
-                        inputs[i].readOnly = !inputs[i].readOnly;
-                    }
-                    submitButton.disabled = !submitButton.disabled;
-                }
-        
-                // Event listeners to calculate BMI when height or weight changes
-                document.getElementById('height').addEventListener('input', calculateBMI);
-                document.getElementById('weight').addEventListener('input', calculateBMI);
-            </script>
+              
                  
 </body>
 </html>
