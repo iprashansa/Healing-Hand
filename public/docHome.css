@@ -5,6 +5,11 @@
     border: border-box;
 }
 
+.welcome-user{
+    position: absolute;
+    right: 50px;
+}
+
 .navbar1{
     
     height: 30vh;
