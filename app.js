@@ -28,7 +28,6 @@ const patientHealbot = require('./routes/healbot');
 const patientRecords = require('./routes/patientRecords');
 
 const doctorProfileRouter = require('./routes/doctorProfile');
-const doctorDetailsRoute = require('./routes/doctorDetailsRoute');
 
 app.use('/',mainPage);
 app.use('/doctor', doctorRoutes);
@@ -41,7 +40,6 @@ app.use('/',patientHealbot);
 app.use('/patient/records',patientRecords);
 
 app.use('/doctor/docHome', doctorProfileRouter);
-app.use('/doctor/docHome/doctorDetails', doctorDetailsRoute);
 
  app.listen(3000,function(){
     console.log("server is running so beautifully");

@@ -37,13 +37,25 @@ router.post('/login', async function(req, res) {
             console.log('Invalid credentials');
             return res.status(400).send('Invalid credentials');
         }
-        req.session.doctorName = doctor.name;
+        req.session.doctor = doctor;
         console.log('Login successful');
         res.redirect('/doctor/docHome');
     } catch (error) {
         console.error('Error during login:', error);
         res.status(500).send(error.message);
     }
+});
+
+router.get('/logout', function(req, res) {
+    req.session.destroy(function(err) {
+        if (err) {
+            console.error('Error destroying session:', err);
+            res.status(500).send('Internal Server Error');
+        } else {
+            console.log('Logout successful');
+            res.redirect('/'); // Redirect to home page
+        }
+    });
 });
 
 
