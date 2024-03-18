@@ -40,7 +40,7 @@ router.post('/login', async function(req, res) {
         }
         
         console.log('Login successful');
-        res.redirect('/doctor/docHome');
+        res.redirect('/patient/patientHome');
     } catch (error) {
         console.error('Error during login:', error);
         res.status(500).send(error.message);
