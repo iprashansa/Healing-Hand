@@ -1,0 +1,173 @@
+*{
+    margin: 0;
+    font-family: Arial;
+    border: border-box;
+}
+
+    
+
+
+
+
+.navbar1{
+    
+    height: 30vh;
+    background-color:#40A2E3;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  
+}
+
+.name{
+font-size: 1.8rem;
+font-family: sans-serif;
+font-style: inherit;
+margin-bottom: 80px;
+margin-right: 30px;
+}
+
+.search{
+    display: flex;
+    justify-content:space-evenly ;
+    /* background-color: pink; */
+    width: 35vw;                        
+    height: 5vh;                          
+    border-radius: 4px;
+   
+}
+.search:hover{
+    border: 2px solid rgba(12, 1, 2, 0.603);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.search-select{
+    background-color: #f3f3f3;
+    width: 50px;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border: none;
+
+}
+
+.search-input {
+   
+    width: 100%;
+    font-size: 1rem;
+    border:none;
+    font-size: 17px;
+ 
+}
+
+.search-icon{
+
+    width: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    background-color: aquamarine;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color:#0f1111
+
+    
+
+
+}
+
+
+.home{
+     font-size: 1.2rem;
+}
+
+.about{
+    font-size: 1.2rem;
+}
+.Emergency{    font-size: 1.2rem;
+}
+
+
+.faq{
+    font-size: 1.2rem;
+}
+.noti{
+ 
+ font-size: 20px;
+
+
+}
+
+.margin{
+    margin-top: 75px;
+}
+
+
+
+    @media(max-width: 768px) {
+
+
+
+        .navbar1 {
+          
+            height:15vh; 
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;}
+
+        }
+
+.mid-container{
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+}
+
+ .header{
+    
+        background-color: #211951;
+        color: #FFF6E9;
+        padding: 20px;
+        text-align: center;
+    
+}
+.main {
+    display: flex;
+    flex: 1;
+}
+section {
+    padding: 20px;
+    flex: 1;
+}
+#team {
+    background-color: #FFF6E9;
+}
+#contact {
+    background-color: #BBE2EC;
+}
+h2 {
+    color: #333;
+}
+p {
+    line-height: 1.6;
+}
+footer {
+    background-color: #211951;
+    color: #FFF6E9;
+    text-align: center;
+    padding: 10px 0;
+}
+.list{
+    font-size: large;
+}
+p{
+    font-size: large;
+}
