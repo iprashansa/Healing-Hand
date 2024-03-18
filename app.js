@@ -26,9 +26,8 @@ const patientProfile = require('./routes/patientProfile')
 const patientBlog = require('./routes/patientBlog')
 const patientHealbot = require('./routes/healbot');
 const patientRecords = require('./routes/patientRecords');
-
 const doctorProfileRouter = require('./routes/doctorProfile');
-const doctorDetailsRoute = require('./routes/doctorDetailsRoute');
+
 
 
 app.use('/',mainPage);
@@ -40,9 +39,8 @@ app.use('/patient/profile',patientProfile);
 app.use('/patient/blog',patientBlog);
 app.use('/',patientHealbot);
 app.use('/patient/records',patientRecords);
-
 app.use('/doctor/docHome', doctorProfileRouter);
-app.use('/doctor/docHome/doctorDetails', doctorDetailsRoute);
+
 
 
  app.listen(3000,function(){

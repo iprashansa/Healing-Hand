@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 const MedicalRecordsSchema = new mongoose.Schema({
 
@@ -70,8 +71,14 @@ const MedicalRecordsSchema = new mongoose.Schema({
     presentMedicalReport: {
         type: String, 
         required: true
-    }
+    },
+    // PatientRegister: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'PatientRegister', // Reference to the PatientRegister model
+        
+    // }
 });
+
 
 const PatientMedicalRecords = mongoose.model("PatientMedicalRecords", MedicalRecordsSchema);
 module.exports = PatientMedicalRecords;

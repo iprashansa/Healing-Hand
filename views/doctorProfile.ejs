@@ -18,7 +18,7 @@
     
         <!-- Edit Options - initially hidden -->
         <div id="edit-options" style="display: none;">
-            <form action="/doctor/docHome/doctorDetails/edit" method="POST">
+            <form action="/doctor/docHome/doctorDetails" method="POST">
                 <!-- Input fields for editing -->
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" value="<%= doctor.name %>">
@@ -38,6 +38,7 @@
         </div>
     
         <!-- Edit Button - toggles visibility of edit options -->
+        <!-- <form action="/doctor/docHome/doctorDetails/:id" method="" -->
         <button id="edit-button" onclick="toggleEditOptions()">Edit</button>
     </div>
 </body>

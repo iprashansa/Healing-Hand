@@ -22,8 +22,11 @@ const patientRegisterSchema = new mongoose.Schema({
         type:String,
         required:true,
         unique:true
-    }
-   
+    },
+    // PatientMedicalRecords:{
+    //     type:mongoose.Schema.Types.ObjectId,
+    //     ref:'PatientMedicalRecords'
+    // }
 });
 
 const PatientRegister = mongoose.model("PatientRegister",patientRegisterSchema);
