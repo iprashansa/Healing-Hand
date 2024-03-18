@@ -298,3 +298,7 @@ margin-right: 30px;
     /* background-color: #f2fcff; */
 
 }
+ input{
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+
+ }
