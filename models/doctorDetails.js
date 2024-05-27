@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
 const doctorDetailsSchema = new mongoose.Schema({
-    // doctor: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'DocRegister',
-    //     required: true
-    // },
+    doctor: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'DocRegister',
+        required: true
+    },
     name: String,
     speciality: String,
     contact: String,

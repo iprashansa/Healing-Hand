@@ -1,0 +1,43 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.doctor-card {
+    background-color: #f9f9f9; /* Light gray background */
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.doctor-card h2 {
+    margin-top: 0;
+}
+
+.doctor-card p {
+    margin: 5px 0;
+}
+
+form {
+    margin-top: 10px;
+}
+
+button {
+    background-color: white; /* White background for button */
+    color: black; /* Black text color */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #e0e0e0; /* Light gray background on hover */
+}

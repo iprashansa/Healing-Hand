@@ -22,10 +22,8 @@ router.post('/',async function(req,res){
 try {
     const {height,weight,BMI,bloodReport,insurance,insuranceFile,married,consanguineous,diet,smoking,drinking,pastDiseases,pastDiseasesReport,familyMedicalCondition,presentMedicalCondition,medicalSymptoms,presentMedicalReport} = req.body;
 
-    const patient = await PatientRegister.findOne({email:req.session.id})
-    if (!patient) {
-        return res.status(404).send("Patient not found");
-    }
+   
+    
     const newPatientRecords = new PatientMedicalRecords({height,weight,BMI,bloodReport,insurance,insuranceFile,married,consanguineous,diet,smoking,drinking,pastDiseases,pastDiseasesReport,familyMedicalCondition,presentMedicalCondition,medicalSymptoms,presentMedicalReport});
         await newPatientRecords.save();
         res.redirect("/patient/records");

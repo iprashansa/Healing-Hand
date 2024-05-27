@@ -1,32 +1,24 @@
 const mongoose = require('mongoose');
 
-const patientProfileSchema = new mongoose.Schema({
+const appointmentsSchema = new mongoose.Schema({
     name:{
         type:String,
         required:true
     },
-    bloodGroup:{
-        type:String,
-        required:true
-    },
-    age:{
-        type:Number,
-        required:true
-    },
 
-    email:{
+    specialty:{
         type:String,
         required:true,
         unique:true
     },
 
-    number:{
+    contact:{
         type:Number,
         required:true,
         unique:true
     },
 
-    address:{
+    location:{
         type:String,
         required:true,
         unique:true
@@ -37,6 +29,6 @@ const patientProfileSchema = new mongoose.Schema({
     // }
 });
 
-const PatientProfile = mongoose.model("PatientProfile",patientProfileSchema);
-module.exports = PatientProfile;
+const Appointments = mongoose.model("Appointments",appointmentsSchema);
+module.exports = Appointments;
 

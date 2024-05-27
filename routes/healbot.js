@@ -9,7 +9,7 @@ require('dotenv').config();
 router.use(bodyParser.urlencoded({extended:true}));
 router.use(bodyParser.json());
 
-const openai = new OpenAI({ apiKey:  process.env.OPENAI_API_KEY });
+const openai = new OpenAI({ apiKey: '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'});
 router.get('/patient/healbot', (req , res) => {
     res.render('healbot');
 });

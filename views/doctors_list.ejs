@@ -5,17 +5,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/doctor_list.css">
     <title>All Doctors</title>
 </head>
 <body>
     <h1>All Doctors</h1>
     <% allDoctors.forEach(doctorDetails => { %>
         <div>
-            <h2><%= doctorDetails.doctor.name %></h2>
-            <p>Speciality: <%= doctorDetails.speciality %></p>
-            <p>Contact: <%= doctorDetails.contact %></p>
-            <p>Location: <%= doctorDetails.location %></p>
-            <form action="/bookAppointment" method="post">
+            <form action="/patient/appointments" method="post">
+            <h2 name="name"><%= doctorDetails.name %></h2>
+            <p name="speciality">Speciality: <%= doctorDetails.speciality %></p>
+            <p name="contact">Contact: <%= doctorDetails.contact %></p>
+            <p name="location">Location: <%= doctorDetails.location %></p>
+           
                 <input type="hidden" name="doctorDetailsId" value="<%= doctorDetails._id %>">
                 <button type="submit">Book Appointment</button>
             </form>

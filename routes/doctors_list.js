@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const DoctorDetails = require('../models/doctorDetails');
+const Appointments = require('../models/appointment');
 
 router.get('/appointments', async (req, res) => {
     try {
@@ -14,5 +15,11 @@ router.get('/appointments', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+router.post('/appointments',async(req,res)=>{
+    const {name,speciality,contact,location} = req.body;
+    const newAppointments = new Appointments({name,speciality,contact,location});
+    await newAppointments.save();
+})
 
 module.exports = router;
