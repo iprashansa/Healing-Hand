@@ -27,11 +27,6 @@ const patientBlog = require('./routes/patientBlog')
 const patientHealbot = require('./routes/healbot');
 const patientRecords = require('./routes/patientRecords');
 const doctorProfileRouter = require('./routes/doctorProfile');
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 342c7dc (Minor Changes)
 
 app.use('/',mainPage);
 app.use('/doctor', doctorRoutes);
@@ -43,11 +38,8 @@ app.use('/patient/blog',patientBlog);
 app.use('/',patientHealbot);
 app.use('/patient/records',patientRecords);
 app.use('/doctor/docHome', doctorProfileRouter);
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 342c7dc (Minor Changes)
 
  app.listen(3000,function(){
     console.log("server is running so beautifully");
