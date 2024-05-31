@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const session = require("express-session");
-
+require('dotenv').config();
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -47,5 +47,5 @@ app.get('/api-key', (req, res) => {
 
  app.listen(3000,function(){
     console.log("server is running so beautifully");
-    
+
  })
