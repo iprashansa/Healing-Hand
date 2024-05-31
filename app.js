@@ -27,6 +27,7 @@ const patientBlog = require('./routes/patientBlog')
 const patientHealbot = require('./routes/healbot');
 const patientRecords = require('./routes/patientRecords');
 const doctorProfileRouter = require('./routes/doctorProfile');
+const patientEmergency = require('./routes/emergency');
 
 app.use('/',mainPage);
 app.use('/doctor', doctorRoutes);
@@ -38,10 +39,13 @@ app.use('/patient/blog',patientBlog);
 app.use('/',patientHealbot);
 app.use('/patient/records',patientRecords);
 app.use('/doctor/docHome', doctorProfileRouter);
+app.use('/patient/emergency',patientEmergency);
 
-
+app.get('/api-key', (req, res) => {
+   res.json({ apiKey: process.env.GOOGLE_MAPS_API_KEY });
+});
 
  app.listen(3000,function(){
     console.log("server is running so beautifully");
-
+    
  })

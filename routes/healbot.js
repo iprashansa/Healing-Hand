@@ -1,11 +1,13 @@
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const bodyParser = require("body-parser");
 const OpenAI = require('openai');
-require('dotenv').config();
+
 
 router.use(bodyParser.urlencoded({extended:true}));
 router.use(bodyParser.json());
+console.log('Loaded OpenAI API Key:', process.env.OPENAI_API_KEY); // Add this line
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
