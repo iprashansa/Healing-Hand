@@ -14,6 +14,7 @@ router.post("/patientSignUp",async function(req,res){
         const hashedPassword = await bcrypt.hash(password, 10);
         const newPatient = new PatientRegister({name,email,phoneNumber,password:hashedPassword});
         await newPatient.save();
+        req.session.patient=newPatient;
         res.redirect("/patient/patientHome");
     } catch (error) {
         res.status(400).send(error.message);
@@ -38,13 +39,26 @@ router.post('/login', async function(req, res) {
             console.log('Invalid credentials');
             return res.status(400).send('Invalid credentials');
         }
-        
+        req.session.patient=patient;
         console.log('Login successful');
         res.redirect('/patient/patientHome');
     } catch (error) {
         console.error('Error during login:', error);
         res.status(500).send(error.message);
     }
+});
+
+
+router.get('/logout', function(req, res) {
+    req.session.destroy(function(err) {
+        if (err) {
+            console.error('Error destroying session:', err);
+            res.status(500).send('Internal Server Error');
+        } else {
+            console.log('Logout successful');
+            res.redirect('/'); // Redirect to home page
+        }
+    });
 });
 
 module.exports = router;

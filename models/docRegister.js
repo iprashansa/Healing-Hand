@@ -31,7 +31,9 @@ const docRegisterSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    speciality: String,
+    location: String,
 });
 
 const DocRegister = mongoose.model("DocRegister", docRegisterSchema);

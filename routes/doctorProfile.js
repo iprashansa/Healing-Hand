@@ -1,57 +1,35 @@
+// Inside doctorRoutes.js or equivalent
 const express = require('express');
 const router = express.Router();
-const DoctorDetails = require("../models/doctorDetails");
+const DoctorModel = require('../models/docRegister'); // Adjust the path as per your file structure
 
-// GET route to display doctor details
-router.get('/doctorDetails', async (req, res) => {
-    try {
-        // Fetch doctor details from the database
-        const doctorDetails = await DoctorDetails.findOne(); // Assuming you only have one doctor's details
-
-        if (doctorDetails) {
-            // Render the doctorProfile view with the fetched details
-            res.render('doctorProfile', { doctor: doctorDetails });
-        } else {
-            // If no doctor details found, render with default dummy doctor details
-            const doctor = {
-                name: 'Doctor Name',
-                speciality: 'Doctor Speciality',
-                contact: 'Doctor Contact',
-                location: 'Doctor Location'
-                // Add more details 
-            };
-            res.render('doctorProfile', { doctor: doctor });
-        }
-    } catch (err) {
-        console.error("Error fetching doctor details:", err);
-        
-    }
+// Route to render doctor profile page
+router.get('/doctorProfile', (req, res) => {
+    // Fetch doctor's information from session or database if needed
+    const doctor = req.session.doctor; // Assuming doctor data is stored in session
+    res.render('doctorProfile', { doctor });
 });
 
-
-// POST route to save doctor details
-router.post('/doctorDetails', async (req, res) => {
-    const { name, speciality, contact, location } = req.body;
+router.post('/updateProfile', async (req, res) => {
     try {
-        // Check if there are existing doctor details in the database
-        let existingDoctorDetails = await DoctorDetails.findOne();
+        const { name, speciality, contact, location } = req.body;
+        
+        // Update profile logic using Mongoose or other ORM
+        const doctor = await DoctorModel.findByIdAndUpdate(req.session.doctor._id, {
+            name,
+            speciality,
+            contact,
+            location
+        }, { new: true });
 
-        if (existingDoctorDetails) {
-            // If doctor details exist, update them
-            existingDoctorDetails.name = name;
-            existingDoctorDetails.speciality = speciality;
-            existingDoctorDetails.contact = contact;
-            existingDoctorDetails.location = location;
-            await existingDoctorDetails.save();
-        } else {
-            // If no existing doctor details found, create new ones
-            const newDoctorProfile = new DoctorDetails({ name, speciality, contact, location });
-            await newDoctorProfile.save();
+        if (!doctor) {
+            return res.status(404).send('Doctor not found'); // Handle case where doctor is not found
         }
-        res.redirect("/doctor/docHome/doctorDetails");
-    } catch (err) {
-        console.error("Error saving/updating doctor details:", err);
-        res.status(500).send("Internal Server Error");
+        req.session.doctor = doctor;
+        res.redirect('/doctor/docHome'); // Redirect after successful update
+    } catch (error) {
+        console.error('Error updating profile:', error);
+        res.status(500).send('Error updating profile');
     }
 });
 

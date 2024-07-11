@@ -20,6 +20,18 @@
         <h3>Healed</h3>
         
            </div>
+           <div class="welcome-message">
+            <% if (doctor) { %>
+                Welcome, <%= doctor.name %>
+                <br>
+                <a href="/doctor/logout">Logout</a>
+            <% } %>
+        </div>
+        <!-- <div class="logout-link">
+            <% if (doctor) { %>
+                <a href="/doctor/logout">Logout</a>
+            <% } %>
+        </div> -->
           
 
            <div class="search margin">
@@ -85,7 +97,7 @@
 
 
     <div class="circle1 round">
-        <a href="/doctor/docHome/doctorDetails"> <div class="image" style="background-image: url('/images/image.jpg.jpeg');"></div>   </a>   
+        <a href="/doctor/docHome/doctorProfile"> <div class="image" style="background-image: url('/images/image.jpg.jpeg');"></div>   </a>   
     </div>
     
     <div class="circle2 round">
@@ -101,7 +113,7 @@
     <div class="first-middle name">
     
     <div class="profile ">
-        <a href="/doctor/docHome/doctorDetails">Profile</a>
+        <a href="/doctor/docHome/doctorProfile">Profile</a>
     </div>
     <div class="bookappo ">
           <a href="">Scheduled Appointment</a>

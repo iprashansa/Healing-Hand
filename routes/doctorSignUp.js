@@ -3,6 +3,16 @@ const router = express.Router();
 const DocRegister = require("../models/docRegister");
 const bcrypt = require('bcrypt');
 
+router.get('/doctor/docHome', (req, res) => {
+    // Check if the doctor is logged in (i.e., if req.session.doctor exists)
+    if (req.session.doctor) {
+        res.render('docHome', { doctor: req.session.doctor });
+    } else {
+        // Redirect to login page or handle unauthorized access
+        res.redirect('/doctor/login'); // Redirect to the login page if not logged in
+    }
+});
+
 router.get('/doctorSignUp', (req, res) => {
     res.render('docs_register');
 });
@@ -14,6 +24,7 @@ router.post('/doctorSignUp', async function(req, res) {
         const newDoc = new DocRegister({name, docId, email, phoneNumber, password: hashedPassword});
 
         await newDoc.save();
+        req.session.doctor = newDoc;
         res.redirect('/doctor/docHome'); // Update the redirection path
     } catch (error) {
         res.status(400).send(error.message);

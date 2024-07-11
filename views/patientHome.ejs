@@ -19,7 +19,13 @@
     <div class="name">
         <h3>Healed</h3>
            </div>
-         
+           <div class="welcome-message">
+                <% if (patient) { %>
+                    Welcome, <%= patient.name %>
+                    <br>
+                    <a href="/patient/logout">Logout</a>
+                <% } %>
+            </div>
 
            <div class="search margin">
            <select class="search-select">

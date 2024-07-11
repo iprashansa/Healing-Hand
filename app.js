@@ -10,11 +10,10 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
 mongoose.connect('mongodb://localhost/healingHandDB');
 
-
 app.use(session({
    secret: 'your_secret_key', // Change this to a random string
    resave: false,
-   saveUninitialized: false
+   saveUninitialized: false,
 }));
 
 const mainPage = require('./routes/index');
@@ -23,6 +22,7 @@ const patientRoutes = require('./routes/patientSignUp');
 const patientHome = require('./routes/patientHome');
 const docHome = require('./routes/docHome');
 const patientProfile = require('./routes/patientProfile')
+//const doctorProfile = require('./routes/doctorProfile')
 const patientBlog = require('./routes/patientBlog')
 const patientHealbot = require('./routes/healbot');
 const patientRecords = require('./routes/patientRecords');
@@ -40,6 +40,8 @@ app.use('/',patientHealbot);
 app.use('/patient/records',patientRecords);
 app.use('/doctor/docHome', doctorProfileRouter);
 app.use('/patient/emergency',patientEmergency);
+
+//app.use('/doctor/profile',doctorProfile);
 
 app.get('/api-key', (req, res) => {
    res.json({ apiKey: process.env.GOOGLE_MAPS_API_KEY });

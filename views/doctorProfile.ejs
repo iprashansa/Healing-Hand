@@ -6,19 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctor Profile</title>
     <link rel="stylesheet" href="/doctorProfile.css">
-
 </head>
 <body>
     <div class="doctor-details">
         <h2>Doctor Profile</h2>
         <p>Name: <%= doctor.name %></p>
         <p>Speciality: <%= doctor.speciality %></p>
-        <p>Contact: <%= doctor.contact %></p>
+        <p>Contact: <%= doctor.phoneNumber %></p>
         <p>Location: <%= doctor.location %></p>
     
         <!-- Edit Options - initially hidden -->
         <div id="edit-options" style="display: none;">
-            <form action="/doctor/docHome/doctorDetails" method="POST">
+            <form action="/doctor/docHome/updateProfile" method="POST">
                 <!-- Input fields for editing -->
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" value="<%= doctor.name %>">
@@ -27,7 +26,7 @@
                 <input type="text" id="speciality" name="speciality" value="<%= doctor.speciality %>">
                 <br>
                 <label for="contact">Contact:</label>
-                <input type="text" id="contact" name="contact" value="<%= doctor.contact %>">
+                <input type="text" id="contact" name="contact" value="<%= doctor.phoneNumber %>">
                 <br>
                 <label for="location">Location:</label>
                 <input type="text" id="location" name="location" value="<%= doctor.location %>">
@@ -38,23 +37,23 @@
         </div>
     
         <!-- Edit Button - toggles visibility of edit options -->
-        <!-- <form action="/doctor/docHome/doctorDetails/:id" method="" -->
         <button id="edit-button" onclick="toggleEditOptions()">Edit</button>
     </div>
-</body>
-<script>
-    function toggleEditOptions() {
-        var editOptions = document.getElementById("edit-options");
-        var editButton = document.getElementById("edit-button");
 
-        // Toggle visibility of edit options
-        if (editOptions.style.display === "none") {
-            editOptions.style.display = "block";
-            editButton.textContent = "Cancel"; // Change button text to "Cancel"
-        } else {
-            editOptions.style.display = "none";
-            editButton.textContent = "Edit"; // Change button text back to "Edit"
+    <script>
+        function toggleEditOptions() {
+            var editOptions = document.getElementById("edit-options");
+            var editButton = document.getElementById("edit-button");
+
+            // Toggle visibility of edit options
+            if (editOptions.style.display === "none") {
+                editOptions.style.display = "block";
+                editButton.textContent = "Cancel"; // Change button text to "Cancel"
+            } else {
+                editOptions.style.display = "none";
+                editButton.textContent = "Edit"; // Change button text back to "Edit"
+            }
         }
-    }
-</script>
+    </script>
+</body>
 </html>
