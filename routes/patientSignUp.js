@@ -15,6 +15,7 @@ router.post("/patientSignUp",async function(req,res){
         const newPatient = new PatientRegister({name,email,phoneNumber,password:hashedPassword});
         await newPatient.save();
         req.session.patient=newPatient;
+        req.session.userId=newPatient._id;
         res.redirect("/patient/patientHome");
     } catch (error) {
         res.status(400).send(error.message);
@@ -40,6 +41,7 @@ router.post('/login', async function(req, res) {
             return res.status(400).send('Invalid credentials');
         }
         req.session.patient=patient;
+        req.session.userId=patient._id;
         console.log('Login successful');
         res.redirect('/patient/patientHome');
     } catch (error) {

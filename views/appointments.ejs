@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+    <link rel="stylesheet" href="/appointments.css"> <!-- Link to the CSS file -->
+</head>
+<body>
+    <div class="container">
+        <h1>Book an Appointment</h1>
+        <h2>Available Doctors</h2>
+        <div class="doctor-cards">
+            <% doctors.forEach(doctor => { %>
+                <a href="/patient/appointments/<%= doctor._id %>" class="doctor-card">
+                    <h3><%= doctor.name %></h3>
+                    <p><strong>Speciality:</strong> <%= doctor.speciality %></p>
+                    <p><strong>Location:</strong> <%= doctor.location %></p>
+                    <p><strong>Contact:</strong> <%= doctor.phoneNumber %></p>
+                </a>
+            <% }); %>
+        </div>
+    </div>
+</body>
+</html>

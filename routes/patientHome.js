@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
         res.render('patientHome', { patient: req.session.patient });
     } else {
         // Redirect to login page or handle unauthorized access
-        res.redirect('/patient/login'); // Redirect to the login page if not logged in
+        res.redirect('/patient/patientSignUp'); // Redirect to the login page if not logged in
     }
 });
 

@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2,  h3 {
+    text-align: center;
+}
+
+.doctor-cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.doctor-card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    margin: 10px 0;
+    padding: 20px;
+    /* text-align: center; */
+    text-decoration: none; /* Remove underline from links */
+    color: inherit; /* Inherit text color */
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition for hover effect */
+}
+
+.doctor-card h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.doctor-card p {
+    margin: 10px 0;
+    color: #666;
+}
+
+.doctor-card strong {
+    color: #333;
+}
+
+.doctor-card:hover {
+    transform: translateY(-5px); /* Move card up on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+}
+
+
+.date-group {
+    margin: 20px 0;
+}
+
+.time-slots {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px 0;
+}
+
+.time-slot {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 5px;
+    padding: 10px;
+    min-width: 100px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.time-slot:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

@@ -1,5 +1,25 @@
 const mongoose = require('mongoose');
 
+const appointmentSchema = new mongoose.Schema({
+    doctorId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Doctor',
+        required: true
+    },
+    date: {
+        type: String,
+        required: true
+    },
+    startTime: {
+        type: String,
+        required: true
+    },
+    endTime: {
+        type: String,
+        required: true
+    }
+});
+
 const patientRegisterSchema = new mongoose.Schema({
     name:{
         type:String,
@@ -22,6 +42,10 @@ const patientRegisterSchema = new mongoose.Schema({
         type:String,
         required:true,
         unique:true
+    },
+    bookedAppointments: {
+        type: [appointmentSchema],
+        default: []
     },
     // PatientMedicalRecords:{
     //     type:mongoose.Schema.Types.ObjectId,

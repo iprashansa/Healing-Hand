@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Details</title>
+    <link rel="stylesheet" href="/appointments.css"> <!-- Reuse the same CSS file -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1><%= doctor.name %></h1>
+        <p><strong>Speciality:</strong> <%= doctor.speciality %></p>
+        <p><strong>Location:</strong> <%= doctor.location %></p>
+        <p><strong>Contact:</strong> <%= doctor.phoneNumber %></p>
+        <p><strong>Email:</strong> <%= doctor.email %></p>
+
+        <h2>Available Time Slots</h2>
+        <% const groupedSlots = {}; %>
+        <% doctor.availableSlots.forEach(slot => { %>
+            <% const date = slot.date; %>
+            <% if (!groupedSlots[date]) { groupedSlots[date] = []; } %>
+            <% groupedSlots[date].push(slot); %>
+        <% }); %>
+
+        <% Object.keys(groupedSlots).forEach(date => { %>
+            <div class="date-group">
+                <h3><%= date %></h3>
+                <div class="time-slots">
+                    <% groupedSlots[date].forEach(slot => { %>
+                        <% if (slot.isAvailable) { %>
+                            <div class="time-slot" data-date="<%= date %>" data-time="<%= slot.startTime %>">
+                                <%= slot.startTime.slice(0, 5) %> - <%= slot.endTime.slice(0, 5) %>
+                            </div>
+                        <% } %>
+                    <% }); %>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('.time-slot').click(function() {
+                const date = $(this).data('date');
+                const time = $(this).data('time');
+                const confirmation = confirm(`Do you want to book the slot on ${date} at ${time}?`);
+                
+                if (confirmation) {
+                    $.post('/patient/appointments/bookSlot', {
+                        doctorId: '<%= doctor._id %>',
+                        date: date,
+                        time: time
+                    }, function(response) {
+                        if (response.success) {
+                            alert('Slot booked successfully!');
+                            location.reload(); // Refresh the page to reflect the updated slots
+                        } else {
+                            alert('Error booking slot. Please try again.');
+                        }
+                    });
+                } else {
+                    console.log("erorslkfj");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
