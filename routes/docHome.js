@@ -2,27 +2,18 @@ const express = require('express');
 const router = express.Router();
 const Doctor = require('../models/docRegister');
 const Patient = require('../models/patientRegister');
+const { requireDoctorAuth } = require('./doctorSignUp');
 
-router.get('/', (req, res) => {
-    // Check if the doctor is logged in
-    // if (!req.session.doctor) {
-    //     // Redirect to login page if doctor is not logged in
-    //     return res.redirect('/doctor/doctorSignUp');
-    // }
-
+router.get('/', requireDoctorAuth, (req, res) => {
     // Render doctor home page with doctor's information
-    res.render('docHome', { doctor: req.session.doctor });
+    res.render('docHome', { doctor: req.user });
 });
 
 // Route to show scheduled appointments for the logged-in doctor
-router.get('/appointments', async (req, res) => {
+router.get('/appointments', requireDoctorAuth, async (req, res) => {
     try {
-        // Ensure doctor is logged in
-        if (!req.session.doctor) {
-            return res.redirect('/doctor/doctorSignUp');
-        }
         // Fetch the latest doctor data from DB (in case of updates)
-        const doctor = await Doctor.findById(req.session.doctor._id).lean();
+        const doctor = await Doctor.findById(req.user.userId).lean();
         if (!doctor) {
             return res.status(404).send('Doctor not found');
         }
@@ -57,12 +48,9 @@ router.get('/appointments', async (req, res) => {
 });
 
 // Route to mark an appointment as done
-router.post('/appointments/:appointmentId/done', async (req, res) => {
+router.post('/appointments/:appointmentId/done', requireDoctorAuth, async (req, res) => {
     try {
-        if (!req.session.doctor) {
-            return res.status(401).json({ success: false, message: 'Unauthorized' });
-        }
-        const doctor = await Doctor.findById(req.session.doctor._id);
+        const doctor = await Doctor.findById(req.user.userId);
         if (!doctor) {
             return res.status(404).json({ success: false, message: 'Doctor not found' });
         }

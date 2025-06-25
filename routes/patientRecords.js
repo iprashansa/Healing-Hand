@@ -3,6 +3,7 @@ const router = express.Router();
 const PatientMedicalRecords = require("../models/patientRecords");
 const  {validationResult } = require('express-validator');
 const PatientRegister = require('../models/patientRegister');
+const { requirePatientAuth } = require('./patientSignUp');
 
 const validate = (req, res, next) => {
     const errors = validationResult(req);
@@ -12,11 +13,10 @@ const validate = (req, res, next) => {
     next();
 };
 
-
-
-router.get("/",function(req,res){
-    res.render('medical_records')
-})
+router.get('/', requirePatientAuth, (req, res) => {
+    // You can fetch and pass patient records here if needed
+    res.render('medical_records', { patient: req.user });
+});
 
 router.post('/',async function(req,res){
 try {
@@ -32,6 +32,5 @@ try {
     }
     
 })
-
 
 module.exports = router;

@@ -2,15 +2,13 @@ const express = require('express');
 const router = express.Router();
 const DocRegister = require("../models/docRegister");
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
-router.get('/doctor/docHome', (req, res) => {
-    // Check if the doctor is logged in (i.e., if req.session.doctor exists)
-    if (req.session.doctor) {
-        res.render('docHome', { doctor: req.session.doctor });
-    } else {
-        // Redirect to login page or handle unauthorized access
-        res.redirect('/doctor/login'); // Redirect to the login page if not logged in
-    }
+const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
+const COOKIE_OPTIONS = { httpOnly: true, secure: false, sameSite: 'lax' };
+
+router.get('/doctor/docHome', requireDoctorAuth, (req, res) => {
+    res.render('docHome', { doctor: req.user });
 });
 
 router.get('/doctorSignUp', (req, res) => {
@@ -22,10 +20,11 @@ router.post('/doctorSignUp', async function(req, res) {
         const {name, docId, email, phoneNumber, password} = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
         const newDoc = new DocRegister({name, docId, email, phoneNumber, password: hashedPassword});
-
         await newDoc.save();
-        req.session.doctor = newDoc;
-        res.redirect('/doctor/docHome'); // Update the redirection path
+        // Generate JWT
+        const token = jwt.sign({ userId: newDoc._id, name: newDoc.name, role: 'doctor' }, JWT_SECRET, { expiresIn: '7d' });
+        res.cookie('token', token, COOKIE_OPTIONS);
+        res.redirect('/doctor/docHome');
     } catch (error) {
         res.status(400).send(error.message);
     }
@@ -34,40 +33,38 @@ router.post('/doctorSignUp', async function(req, res) {
 router.post('/login', async function(req, res) {
     try {
         const { email, password } = req.body;
-
         const doctor = await DocRegister.findOne({ email });
-
         if (!doctor) {
-            // If doctor not found, return an error
-            console.log('Invalid credentials');
             return res.status(400).send('Invalid credentials');
         }
         const isPasswordValid = await bcrypt.compare(password, doctor.password);
         if (!isPasswordValid) {
-            // If password doesn't match, return an error
-            console.log('Invalid credentials');
             return res.status(400).send('Invalid credentials');
         }
-        req.session.doctor = doctor;
-        console.log('Login successful');
+        // Generate JWT
+        const token = jwt.sign({ userId: doctor._id, name: doctor.name, role: 'doctor' }, JWT_SECRET, { expiresIn: '7d' });
+        res.cookie('token', token, COOKIE_OPTIONS);
         res.redirect('/doctor/docHome');
     } catch (error) {
-        console.error('Error during login:', error);
         res.status(500).send(error.message);
     }
 });
 
+function requireDoctorAuth(req, res, next) {
+    const token = req.cookies.token;
+    if (!token) return res.redirect('/doctor/doctorSignUp');
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        req.user = decoded;
+        next();
+    } catch (err) {
+        return res.redirect('/doctor/doctorSignUp');
+    }
+}
+
 router.get('/logout', function(req, res) {
-    req.session.destroy(function(err) {
-        if (err) {
-            console.error('Error destroying session:', err);
-            res.status(500).send('Internal Server Error');
-        } else {
-            console.log('Logout successful');
-            res.redirect('/'); // Redirect to home page
-        }
-    });
+    res.clearCookie('token');
+    res.redirect('/');
 });
 
-
-module.exports = router;
+module.exports = { router, requireDoctorAuth };

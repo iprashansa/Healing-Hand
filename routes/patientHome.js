@@ -1,18 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const { requirePatientAuth } = require('./patientSignUp');
 
 // router.get('/', (req, res) => {
 //     res.render('patientHome',{patient: req.session.patient});
 // });
 
-router.get('/', (req, res) => {
-    // Check if the patient is logged in
-    if (req.session.patient) {
-        res.render('patientHome', { patient: req.session.patient });
-    } else {
-        // Redirect to login page or handle unauthorized access
-        res.redirect('/patient/patientSignUp'); // Redirect to the login page if not logged in
-    }
+router.get('/', requirePatientAuth, (req, res) => {
+    res.render('patientHome', { patient: req.user });
 });
 
 module.exports = router;

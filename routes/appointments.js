@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Doctor = require('../models/docRegister');
 const Patient = require('../models/patientRegister');
-const mongoose = require('mongoose');
+const { requirePatientAuth } = require('./patientSignUp');
 
 router.get('/', async (req, res) => {
     try {
@@ -27,35 +27,29 @@ router.get('/:doctorId', async (req, res) => {
     }
 });
 
-router.post('/bookSlot', async (req, res) => {
+router.post('/bookSlot', requirePatientAuth, async (req, res) => {
     const { doctorId, date, time } = req.body;
-
     try {
         const doctor = await Doctor.findById(doctorId);
         if (!doctor) {
             return res.status(404).send({ success: false, message: 'Doctor not found' });
         }
-
         const slot = doctor.availableSlots.find(slot => slot.date === date && slot.startTime === time);
         if (!slot || !slot.isAvailable) {
             return res.status(400).send({ success: false, message: 'Slot not available' });
         }
-
         slot.isAvailable = false; // Mark slot as booked
-
         const newAppointment = {
-            patientId: req.session.userId,
+            patientId: req.user.userId,
             date: date,
             startTime: slot.startTime, // Use startTime from slotToBook
             endTime: slot.endTime // Use endTime from slotToBook
         };
         doctor.appointments.push(newAppointment);
-        
-        const patient = await Patient.findById(req.session.userId);
+        const patient = await Patient.findById(req.user.userId);
         if (!patient) {
             return res.status(404).send({ success: false, message: 'Patient not found' });
         }
-
         const patientAppointment = {
             doctorId: doctor._id,
             date: date,
@@ -63,7 +57,6 @@ router.post('/bookSlot', async (req, res) => {
             endTime: slot.endTime
         };
         patient.bookedAppointments.push(patientAppointment);
-
         await doctor.save();
         await patient.save();
         res.send({ success: true });
