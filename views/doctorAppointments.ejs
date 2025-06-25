@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scheduled Appointments</title>
+    <link rel="stylesheet" href="/appointments.css">
+    <style>
+        .appointments-table-container {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 24px;
+            margin: 32px auto;
+            max-width: 900px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+        }
+        th {
+            background-color: #0D9276;
+            color: #fff;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background-color: #f0f2f5;
+        }
+        tr:nth-child(odd) {
+            background-color: #fff;
+        }
+        tr:hover {
+            background-color: #e0f7fa;
+            transition: background 0.2s;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 16px;
+            color: #0D9276;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .back-link:hover {
+            color: #2888E8;
+            text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+            .appointments-table-container {
+                padding: 8px;
+            }
+            th, td {
+                padding: 8px 4px;
+                font-size: 0.95em;
+            }
+        }
+        .mark-done-btn {
+            background-color: #0D9276;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.2s;
+        }
+        .mark-done-btn:hover:enabled {
+            background-color: #2888E8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container appointments-table-container">
+        <h1>Scheduled Appointments</h1>
+        <a href="/doctor/docHome" class="back-link">&larr; Back to Dashboard</a>
+        <% if (appointments.length === 0) { %>
+            <p>No appointments scheduled.</p>
+        <% } else { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Date</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% appointments.forEach(appt => { %>
+                        <tr>
+                            <td><%= appt.patient ? appt.patient.name : 'Unknown' %></td>
+                            <td><%= appt.patient ? appt.patient.email : 'Unknown' %></td>
+                            <td><%= appt.patient ? appt.patient.phoneNumber : 'Unknown' %></td>
+                            <td><%= appt.date %></td>
+                            <td><%= appt.startTime %></td>
+                            <td><%= appt.endTime %></td>
+                            <td class="status-cell"><%= appt.status === 'done' ? 'Done' : 'Pending' %></td>
+                            <td>
+                                <% if (appt.status !== 'done') { %>
+                                    <button class="mark-done-btn" data-id="<%= appt._id %>">Mark as Done</button>
+                                <% } else { %>
+                                    <button class="mark-done-btn" disabled style="background:#ccc;cursor:not-allowed;">Done</button>
+                                <% } %>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } %>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.mark-done-btn').click(function() {
+            var btn = $(this);
+            var apptId = btn.data('id');
+            btn.prop('disabled', true).text('Marking...');
+            $.post(`/doctor/docHome/appointments/${apptId}/done`, function(response) {
+                if (response.success) {
+                    btn.closest('tr').find('.status-cell').text('Done');
+                    btn.text('Done').css({'background':'#ccc','cursor':'not-allowed'});
+                } else {
+                    btn.prop('disabled', false).text('Mark as Done');
+                    alert('Failed to mark as done.');
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html> 

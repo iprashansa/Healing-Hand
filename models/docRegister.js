@@ -15,7 +15,8 @@ const appointmentSchema = new mongoose.Schema({
     },
     date: { type: String, required: true },
     startTime: { type: String, required: true },
-    endTime: { type: String, required: true }
+    endTime: { type: String, required: true },
+    status: { type: String, enum: ['pending', 'done'], default: 'pending' }
 });
 
 const docRegisterSchema = new mongoose.Schema({
