@@ -13,9 +13,10 @@ const validate = (req, res, next) => {
     next();
 };
 
-router.get('/', requirePatientAuth, (req, res) => {
-    // You can fetch and pass patient records here if needed
-    res.render('medical_records', { patient: req.user });
+router.get('/', requirePatientAuth, async (req, res) => {
+    const patient = await PatientRegister.findById(req.user.userId);
+    if (!patient) return res.status(404).send('Patient not found');
+    res.render('medical_records', { patient });
 });
 
 router.post('/',async function(req,res){

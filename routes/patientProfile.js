@@ -3,8 +3,10 @@ const router = express.Router();
 const PatientProfile = require('../models/patientProfile');
 const { requirePatientAuth } = require('./patientSignUp');
 
-router.get('/', requirePatientAuth, (req, res) => {
-    res.render('patient_profile', { patient: req.user });
+router.get('/', requirePatientAuth, async (req, res) => {
+    const patient = await PatientProfile.findById(req.user.userId);
+    if (!patient) return res.status(404).send('Patient not found');
+    res.render('patient_profile', { patient });
 });
 
 router.post('/patient/profile', async (req, res) => {

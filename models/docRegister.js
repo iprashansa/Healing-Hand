@@ -51,6 +51,33 @@ const docRegisterSchema = new mongoose.Schema({
     },
     speciality: String,
     location: String,
+    gender: {
+        type: String,
+        enum: ['Male', 'Female', 'Other'],
+        default: 'Other'
+    },
+    dob: {
+        type: Date
+    },
+    experience: {
+        type: Number, // in years
+        min: 0
+    },
+    qualifications: {
+        type: [String],
+        default: []
+    },
+    languages: {
+        type: [String],
+        default: []
+    },
+    consultationFee: {
+        type: Number,
+        min: 0
+    },
+    bio: {
+        type: String
+    },
     availableSlots: [timeSlotSchema],
     appointments: [appointmentSchema]
 });

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Appointment</title>
     <link rel="stylesheet" href="/appointments.css"> <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <div class="container">
@@ -12,11 +13,24 @@
         <h2>Available Doctors</h2>
         <div class="doctor-cards">
             <% doctors.forEach(doctor => { %>
-                <a href="/patient/appointments/<%= doctor._id %>" class="doctor-card">
-                    <h3><%= doctor.name %></h3>
-                    <p><strong>Speciality:</strong> <%= doctor.speciality %></p>
-                    <p><strong>Location:</strong> <%= doctor.location %></p>
-                    <p><strong>Contact:</strong> <%= doctor.phoneNumber %></p>
+                <a href="/patient/appointments/<%= doctor._id %>" class="doctor-card improved-doctor-card">
+                    <div class="doctor-card-avatar">
+                        <i class="fa-solid fa-user-md"></i>
+                    </div>
+                    <div class="doctor-card-info">
+                        <div class="doctor-card-header">
+                            <h3><%= doctor.name %></h3>
+                            <span class="doctor-card-speciality"><i class="fa-solid fa-stethoscope"></i> <%= doctor.speciality %></span>
+                        </div>
+                        <div class="doctor-card-details">
+                            <div><i class="fa-solid fa-location-dot"></i> <%= doctor.location %></div>
+                            <div><i class="fa-solid fa-phone"></i> <%= doctor.phoneNumber %></div>
+                            <div><i class="fa-solid fa-venus-mars"></i> <%= doctor.gender && doctor.gender !== 'Other' ? doctor.gender : 'N/A' %></div>
+                            <div><i class="fa-solid fa-briefcase-medical"></i> <%= doctor.experience ? doctor.experience + ' yrs' : 'N/A' %></div>
+                            <div><i class="fa-solid fa-indian-rupee-sign"></i> <%= doctor.consultationFee ? '₹' + doctor.consultationFee : 'N/A' %></div>
+                            <div><i class="fa-solid fa-graduation-cap"></i> <%= doctor.qualifications && doctor.qualifications.length ? doctor.qualifications.join(', ') : 'N/A' %></div>
+                        </div>
+                    </div>
                 </a>
             <% }); %>
         </div>

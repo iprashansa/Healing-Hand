@@ -14,6 +14,13 @@
         <p><strong>Location:</strong> <%= doctor.location %></p>
         <p><strong>Contact:</strong> <%= doctor.phoneNumber %></p>
         <p><strong>Email:</strong> <%= doctor.email %></p>
+        <p><strong>Gender:</strong> <%= doctor.gender || 'N/A' %></p>
+        <p><strong>Age:</strong> <%= doctor.dob ? Math.floor((new Date() - new Date(doctor.dob)) / (365.25*24*60*60*1000)) : 'N/A' %></p>
+        <p><strong>Experience:</strong> <%= doctor.experience ? doctor.experience + ' years' : 'N/A' %></p>
+        <p><strong>Qualifications:</strong> <%= doctor.qualifications && doctor.qualifications.length ? doctor.qualifications.join(', ') : 'N/A' %></p>
+        <p><strong>Languages:</strong> <%= doctor.languages && doctor.languages.length ? doctor.languages.join(', ') : 'N/A' %></p>
+        <p><strong>Consultation Fee:</strong> <%= doctor.consultationFee ? '₹' + doctor.consultationFee : 'N/A' %></p>
+        <p><strong>Bio:</strong> <%= doctor.bio || 'N/A' %></p>
 
         <h2>Available Time Slots</h2>
         <% const groupedSlots = {}; %>

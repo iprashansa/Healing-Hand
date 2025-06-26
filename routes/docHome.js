@@ -4,9 +4,10 @@ const Doctor = require('../models/docRegister');
 const Patient = require('../models/patientRegister');
 const { requireDoctorAuth } = require('./doctorSignUp');
 
-router.get('/', requireDoctorAuth, (req, res) => {
-    // Render doctor home page with doctor's information
-    res.render('docHome', { doctor: req.user });
+router.get('/', requireDoctorAuth, async (req, res) => {
+    const doctor = await Doctor.findById(req.user.userId);
+    if (!doctor) return res.status(404).send('Doctor not found');
+    res.render('docHome', { doctor });
 });
 
 // Route to show scheduled appointments for the logged-in doctor

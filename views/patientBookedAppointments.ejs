@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Booked Appointments</title>
+    <link rel="stylesheet" href="/appointments.css">
+    <style>
+        .appointments-table-container, .appointments-table-container table {
+            box-sizing: border-box;
+        }
+        .appointments-table-container {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 24px 24px;
+            margin: 32px auto;
+            max-width: 1000px;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            min-width: 600px;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+        }
+        th {
+            background-color: #0D9276;
+            color: #fff;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background-color: #f0f2f5;
+        }
+        tr:nth-child(odd) {
+            background-color: #fff;
+        }
+        tr:hover {
+            background-color: #e0f7fa;
+            transition: background 0.2s;
+        }
+        .status-cell {
+            font-weight: 600;
+            color: #0D9276;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 18px;
+            color: #0D9276;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .back-link:hover {
+            color: #2888E8;
+            text-decoration: underline;
+        }
+        @media (max-width: 700px) {
+            .appointments-table-container {
+                padding: 8px;
+                overflow-x: auto;
+            }
+            .appointments-table-container table {
+                min-width: 600px;
+            }
+            th, td {
+                padding: 8px 4px;
+                font-size: 0.95em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="appointments-table-container">
+        <h1>My Booked Appointments</h1>
+        <a href="/patient/patientHome" class="back-link">&larr; Back to Dashboard</a>
+        <% if (appointments.length === 0) { %>
+            <p>You have no booked appointments.</p>
+        <% } else { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Doctor</th>
+                        <th>Speciality</th>
+                        <th>Location</th>
+                        <th>Contact</th>
+                        <th>Date</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% appointments.forEach(appt => { %>
+                        <tr>
+                            <td><%= appt.doctor.name || 'N/A' %></td>
+                            <td><%= appt.doctor.speciality || 'N/A' %></td>
+                            <td><%= appt.doctor.location || 'N/A' %></td>
+                            <td><%= appt.doctor.phoneNumber || 'N/A' %></td>
+                            <td><%= appt.date %></td>
+                            <td><%= appt.startTime %></td>
+                            <td><%= appt.endTime %></td>
+                            <td class="status-cell"><%= appt.status === 'done' ? 'Done' : 'Pending' %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } %>
+    </div>
+</body>
+</html> 

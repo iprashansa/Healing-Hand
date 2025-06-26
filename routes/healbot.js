@@ -4,6 +4,7 @@ const router = express.Router();
 const bodyParser = require("body-parser");
 const OpenAI = require('openai');
 const { requirePatientAuth } = require('./patientSignUp');
+const PatientRegister = require('../models/patientRegister');
 
 router.use(bodyParser.urlencoded({extended:true}));
 router.use(bodyParser.json());
@@ -11,8 +12,10 @@ console.log('Loaded OpenAI API Key:', process.env.OPENAI_API_KEY); // Add this l
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-router.get('/', requirePatientAuth, (req, res) => {
-    res.render('healbot', { patient: req.user });
+router.get('/', requirePatientAuth, async (req, res) => {
+    const patient = await PatientRegister.findById(req.user.userId);
+    if (!patient) return res.status(404).send('Patient not found');
+    res.render('healbot', { patient });
 });
 
 router.post('/patient/healbot', async (req, res) => {
