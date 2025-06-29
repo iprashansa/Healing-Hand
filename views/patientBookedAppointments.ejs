@@ -5,52 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Booked Appointments</title>
     <link rel="stylesheet" href="/appointments.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        .appointments-table-container, .appointments-table-container table {
-            box-sizing: border-box;
+        body {
+            background: #f4f6f8;
         }
-        .appointments-table-container {
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            padding: 24px 24px;
+        .booked-appointments-container {
+            width: 90%;
+            max-width: 900px;
             margin: 32px auto;
-            max-width: 1000px;
-            overflow-x: auto;
+            padding: 24px 0;
         }
-        table {
-            width: 100%;
-            min-width: 600px;
-            border-collapse: collapse;
-            margin-top: 16px;
+        .booked-cards {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        th, td {
-            padding: 12px 16px;
-            text-align: left;
-        }
-        th {
-            background-color: #0D9276;
-            color: #fff;
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.95em;
             font-weight: 600;
+            margin-bottom: 10px;
         }
-        tr:nth-child(even) {
-            background-color: #f0f2f5;
-        }
-        tr:nth-child(odd) {
-            background-color: #fff;
-        }
-        tr:hover {
-            background-color: #e0f7fa;
-            transition: background 0.2s;
-        }
-        .status-cell {
-            font-weight: 600;
+        .status-done {
+            background: #e0f7e9;
             color: #0D9276;
+        }
+        .status-pending {
+            background: #fff3cd;
+            color: #b8860b;
+        }
+        .action-buttons {
+            margin-top: 12px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .waiting-text {
+            color: #888;
+            font-size: 0.98em;
+            font-style: italic;
         }
         .back-link {
             display: inline-block;
-            margin-bottom: 18px;
+            margin-bottom: 28px;
             color: #0D9276;
             text-decoration: none;
             font-weight: 500;
@@ -60,64 +60,55 @@
             color: #2888E8;
             text-decoration: underline;
         }
+        .back-link:visited {
+            color: #0D9276;
+        }
         @media (max-width: 700px) {
-            .appointments-table-container {
-                padding: 8px;
-                overflow-x: auto;
-            }
-            .appointments-table-container table {
-                min-width: 600px;
-            }
-            th, td {
-                padding: 8px 4px;
-                font-size: 0.95em;
+            .booked-appointments-container {
+                padding: 8px 0;
             }
         }
     </style>
 </head>
 <body>
-    <div class="appointments-table-container">
-        <h1>My Booked Appointments</h1>
+    <div class="booked-appointments-container">
+        <h1 style="text-align:center;">My Booked Appointments</h1>
         <a href="/patient/patientHome" class="back-link">&larr; Back to Dashboard</a>
         <% if (appointments.length === 0) { %>
             <p>You have no booked appointments.</p>
         <% } else { %>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Doctor</th>
-                        <th>Speciality</th>
-                        <th>Location</th>
-                        <th>Contact</th>
-                        <th>Date</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% appointments.forEach(appt => { %>
-                        <tr>
-                            <td><%= appt.doctor.name || 'N/A' %></td>
-                            <td><%= appt.doctor.speciality || 'N/A' %></td>
-                            <td><%= appt.doctor.location || 'N/A' %></td>
-                            <td><%= appt.doctor.phoneNumber || 'N/A' %></td>
-                            <td><%= appt.date %></td>
-                            <td><%= appt.startTime %></td>
-                            <td><%= appt.endTime %></td>
-                            <td class="status-cell"><%= appt.status === 'done' ? 'Done' : 'Pending' %></td>
-                            <td>
+            <div class="booked-cards">
+                <% appointments.forEach(appt => { %>
+                    <div class="doctor-card improved-doctor-card" style="width:100%;max-width:520px;">
+                        <div class="doctor-card-avatar">
+                            <i class="fa-solid fa-user-md"></i>
+                        </div>
+                        <div class="doctor-card-info">
+                            <div class="doctor-card-header">
+                                <h3>Dr. <%= appt.doctor.name || 'N/A' %></h3>
+                                <span class="doctor-card-speciality"><i class="fa-solid fa-stethoscope"></i> <%= appt.doctor.speciality || 'N/A' %></span>
+                            </div>
+                            <div class="doctor-card-details">
+                                <div><i class="fa-solid fa-location-dot"></i> <%= appt.doctor.location || 'N/A' %></div>
+                                <div><i class="fa-solid fa-phone"></i> <%= appt.doctor.phoneNumber || 'N/A' %></div>
+                                <div><i class="fa-solid fa-calendar-days"></i> <%= appt.date %></div>
+                                <div><i class="fa-solid fa-clock"></i> <strong>Start:</strong> <%= appt.startTime %></div>
+                                <div><i class="fa-regular fa-clock"></i> <strong>End:</strong> <%= appt.endTime %></div>
+                            </div>
+                            <div class="status-badge <%= appt.status === 'done' ? 'status-done' : 'status-pending' %>">
+                                <%= appt.status === 'done' ? 'Done' : 'Pending' %>
+                            </div>
+                            <div class="action-buttons">
                                 <% if (appt.status !== 'done' && appt.isVideoCallActive) { %>
-                                    <button class="join-video-btn" data-room-id="<%= appt.roomId %>" data-appointment-id="<%= appt._id %>" data-doctor-id="<%= appt.doctor._id %>">Join Video Call</button>
+                                    <button class="join-video-btn" data-room-id="<%= appt.roomId %>" data-appointment-id="<%= appt._id %>" data-doctor-id="<%= appt.doctor._id %>"><i class="fa-solid fa-video"></i> Join Video Call</button>
                                 <% } else if (appt.status !== 'done') { %>
-                                    <span class="waiting-text" data-appointment-id="<%= appt._id %>" data-doctor-id="<%= appt.doctor._id %>">Waiting for doctor to start call</span>
+                                    <span class="waiting-text" data-appointment-id="<%= appt._id %>" data-doctor-id="<%= appt.doctor._id %>"><i class="fa-solid fa-hourglass-half"></i> Waiting for doctor to start call</span>
                                 <% } %>
-                            </td>
-                        </tr>
-                    <% }); %>
-                </tbody>
-            </table>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
         <% } %>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -125,28 +116,23 @@
     <script>
         $(document).ready(function() {
             // Join video call functionality
-            $('.join-video-btn').click(function() {
+            $(document).on('click', '.join-video-btn', function() {
                 const roomId = $(this).data('room-id');
                 const appointmentId = $(this).data('appointment-id');
-                
-                // Open video call in same tab
                 const videoCallUrl = `/video-call/${roomId}?userType=patient&appointmentId=${appointmentId}`;
                 window.location.href = videoCallUrl;
             });
 
             // Poll for video call status updates
             setInterval(function() {
-                // Check if any pending appointments have become active
                 $('.waiting-text').each(function() {
                     const appointmentId = $(this).data('appointment-id');
                     const doctorId = $(this).data('doctor-id');
-                    
                     if (appointmentId && doctorId) {
                         $.get(`/api/video-call/appointment/${appointmentId}/status?doctorId=${doctorId}`, function(response) {
                             if (response.success && response.isVideoCallActive && response.roomId) {
-                                // Replace waiting text with join button
                                 const waitingText = $('.waiting-text[data-appointment-id="' + appointmentId + '"]');
-                                waitingText.replaceWith(`<button class="join-video-btn" data-room-id="${response.roomId}" data-appointment-id="${appointmentId}" data-doctor-id="${doctorId}">Join Video Call</button>`);
+                                waitingText.replaceWith(`<button class=\"join-video-btn\" data-room-id=\"${response.roomId}\" data-appointment-id=\"${appointmentId}\" data-doctor-id=\"${doctorId}\"><i class=\"fa-solid fa-video\"></i> Join Video Call</button>`);
                             }
                         });
                     }
