@@ -93,6 +93,7 @@
                         <th>Start Time</th>
                         <th>End Time</th>
                         <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -106,11 +107,52 @@
                             <td><%= appt.startTime %></td>
                             <td><%= appt.endTime %></td>
                             <td class="status-cell"><%= appt.status === 'done' ? 'Done' : 'Pending' %></td>
+                            <td>
+                                <% if (appt.status !== 'done' && appt.isVideoCallActive) { %>
+                                    <button class="join-video-btn" data-room-id="<%= appt.roomId %>" data-appointment-id="<%= appt._id %>" data-doctor-id="<%= appt.doctor._id %>">Join Video Call</button>
+                                <% } else if (appt.status !== 'done') { %>
+                                    <span class="waiting-text" data-appointment-id="<%= appt._id %>" data-doctor-id="<%= appt.doctor._id %>">Waiting for doctor to start call</span>
+                                <% } %>
+                            </td>
                         </tr>
                     <% }); %>
                 </tbody>
             </table>
         <% } %>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Join video call functionality
+            $('.join-video-btn').click(function() {
+                const roomId = $(this).data('room-id');
+                const appointmentId = $(this).data('appointment-id');
+                
+                // Open video call in same tab
+                const videoCallUrl = `/video-call/${roomId}?userType=patient&appointmentId=${appointmentId}`;
+                window.location.href = videoCallUrl;
+            });
+
+            // Poll for video call status updates
+            setInterval(function() {
+                // Check if any pending appointments have become active
+                $('.waiting-text').each(function() {
+                    const appointmentId = $(this).data('appointment-id');
+                    const doctorId = $(this).data('doctor-id');
+                    
+                    if (appointmentId && doctorId) {
+                        $.get(`/api/video-call/appointment/${appointmentId}/status?doctorId=${doctorId}`, function(response) {
+                            if (response.success && response.isVideoCallActive && response.roomId) {
+                                // Replace waiting text with join button
+                                const waitingText = $('.waiting-text[data-appointment-id="' + appointmentId + '"]');
+                                waitingText.replaceWith(`<button class="join-video-btn" data-room-id="${response.roomId}" data-appointment-id="${appointmentId}" data-doctor-id="${doctorId}">Join Video Call</button>`);
+                            }
+                        });
+                    }
+                });
+            }, 10000); // Check every 10 seconds
+        });
+    </script>
 </body>
 </html> 

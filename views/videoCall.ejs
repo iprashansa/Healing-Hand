@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healing-Hand Video Call</title>
+    <link rel="stylesheet" href="/videoCall.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="room-container">
+        <!-- Header -->
+        <div class="room-header">
+            <div class="room-info">
+                <a href="javascript:history.back()" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+                <h2><i class="fas fa-stethoscope"></i> Medical Consultation</h2>
+                <p id="roomIdDisplay">Room: <span id="roomId"></span></p>
+                <p id="userInfo">You are: <span id="userType"></span></p>
+            </div>
+            <div class="participants-count">
+                <i class="fas fa-users"></i>
+                <span id="participantsCount">1</span> participants
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="room-content">
+            <!-- Video Grid -->
+            <div class="video-grid" id="videoGrid">
+                <!-- Videos will be dynamically added here -->
+            </div>
+
+            <!-- Waiting Message -->
+            <div id="waitingMessage" class="waiting-message">
+                <div class="waiting-content">
+                    <i class="fas fa-user-clock"></i>
+                    <h3>Waiting for other participant to join...</h3>
+                    <p>Your video call is ready. The other participant will appear here once they join.</p>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+                <button id="toggleVideo" class="control-btn">
+                    <i class="fas fa-video"></i>
+                </button>
+                <button id="toggleAudio" class="control-btn">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <button id="screenShare" class="control-btn">
+                    <i class="fas fa-desktop"></i>
+                </button>
+                <button id="toggleChat" class="control-btn">
+                    <i class="fas fa-comments"></i>
+                </button>
+                <button id="leaveRoom" class="control-btn leave">
+                    <i class="fas fa-phone-slash"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Chat Sidebar -->
+        <div class="chat-sidebar" id="chatSidebar">
+            <div class="chat-header">
+                <h3><i class="fas fa-comments"></i> Chat</h3>
+                <button id="closeChat" class="close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <!-- Messages will be added here -->
+            </div>
+            <div class="chat-input">
+                <input type="text" id="messageInput" placeholder="Type a message...">
+                <button id="sendMessage">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Participants List -->
+        <div class="participants-sidebar" id="participantsSidebar">
+            <div class="participants-header">
+                <h3><i class="fas fa-users"></i> Participants</h3>
+                <button id="closeParticipants" class="close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="participants-list" id="participantsList">
+                <!-- Participants will be listed here -->
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" class="loading-overlay">
+            <div class="loading-content">
+                <div class="spinner"></div>
+                <p>Connecting to consultation...</p>
+            </div>
+        </div>
+
+        <!-- Error Modal -->
+        <div id="errorModal" class="modal hidden">
+            <div class="modal-content">
+                <h3>Error</h3>
+                <p id="errorMessage"></p>
+                <button id="closeError" class="btn btn-primary">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+    <script>
+        // Pass server data to client
+        window.roomData = {
+            roomId: '<%= roomId %>',
+            userType: '<%= userType %>',
+            userName: '<%= userName %>',
+            userId: '<%= userId %>',
+            appointmentId: '<%= appointmentId %>'
+        };
+    </script>
+    <script src="/videoCall.js"></script>
+</body>
+</html> 

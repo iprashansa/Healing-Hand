@@ -16,7 +16,12 @@ const appointmentSchema = new mongoose.Schema({
     date: { type: String, required: true },
     startTime: { type: String, required: true },
     endTime: { type: String, required: true },
-    status: { type: String, enum: ['pending', 'done'], default: 'pending' }
+    status: { type: String, enum: ['pending', 'done'], default: 'pending' },
+    // Video call fields
+    roomId: { type: String, default: null },
+    isVideoCallActive: { type: Boolean, default: false },
+    videoCallStartedAt: { type: Date, default: null },
+    videoCallEndedAt: { type: Date, default: null }
 });
 
 const docRegisterSchema = new mongoose.Schema({

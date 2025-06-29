@@ -106,11 +106,18 @@
                             <td><%= appt.endTime %></td>
                             <td class="status-cell"><%= appt.status === 'done' ? 'Done' : 'Pending' %></td>
                             <td>
+                                <div class="action-buttons">
                                 <% if (appt.status !== 'done') { %>
                                     <button class="mark-done-btn" data-id="<%= appt._id %>">Mark as Done</button>
+                                    <% if (!appt.isVideoCallActive) { %>
+                                        <button class="start-video-btn" data-id="<%= appt._id %>" data-doctor-id="<%= doctor._id %>">Start Video Call</button>
+                                    <% } else { %>
+                                        <button class="join-video-btn" data-room-id="<%= appt.roomId %>" data-appointment-id="<%= appt._id %>">Join Video Call</button>
+                                    <% } %>
                                 <% } else { %>
                                     <button class="mark-done-btn" disabled style="background:#ccc;cursor:not-allowed;">Done</button>
                                 <% } %>
+                                </div>
                             </td>
                         </tr>
                     <% }); %>
@@ -119,23 +126,57 @@
         <% } %>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script>
-    $(document).ready(function() {
-        $('.mark-done-btn').click(function() {
-            var btn = $(this);
-            var apptId = btn.data('id');
-            btn.prop('disabled', true).text('Marking...');
-            $.post(`/doctor/docHome/appointments/${apptId}/done`, function(response) {
-                if (response.success) {
-                    btn.closest('tr').find('.status-cell').text('Done');
-                    btn.text('Done').css({'background':'#ccc','cursor':'not-allowed'});
-                } else {
-                    btn.prop('disabled', false).text('Mark as Done');
-                    alert('Failed to mark as done.');
-                }
+        $(document).ready(function() {
+            // Existing mark as done functionality
+            $('.mark-done-btn').click(function() {
+                const appointmentId = $(this).data('id');
+                const button = $(this);
+                
+                $.post(`/doctor/docHome/appointments/${appointmentId}/done`, function(response) {
+                    if (response.success) {
+                        button.text('Done').prop('disabled', true).css({
+                            'background': '#ccc',
+                            'cursor': 'not-allowed'
+                        });
+                        button.closest('tr').find('.status-cell').text('Done');
+                    } else {
+                        alert('Error marking appointment as done');
+                    }
+                });
+            });
+
+            // Start video call functionality
+            $('.start-video-btn').click(function() {
+                const appointmentId = $(this).data('id');
+                const doctorId = $(this).data('doctor-id');
+                const button = $(this);
+                
+                $.post('/api/video-call/start', {
+                    appointmentId: appointmentId,
+                    doctorId: doctorId
+                }, function(response) {
+                    if (response.success) {
+                        // Replace button with join button
+                        button.replaceWith(`<button class="join-video-btn" data-room-id="${response.roomId}" data-appointment-id="${appointmentId}">Join Video Call</button>`);
+                        alert('Video call started! Click "Join Video Call" to enter the meeting.');
+                    } else {
+                        alert('Error starting video call: ' + response.message);
+                    }
+                });
+            });
+
+            // Join video call functionality
+            $(document).on('click', '.join-video-btn', function() {
+                const roomId = $(this).data('room-id');
+                const appointmentId = $(this).data('appointment-id');
+                
+                // Open video call in same tab
+                const videoCallUrl = `/video-call/${roomId}?userType=doctor&appointmentId=${appointmentId}`;
+                window.location.href = videoCallUrl;
             });
         });
-    });
     </script>
 </body>
 </html> 

@@ -14,9 +14,15 @@ router.get('/bookedAppointments', requirePatientAuth, async (req, res) => {
                 const doctor = await Doctor.findById(appt.doctorId);
                 // Find the matching appointment in doctor's appointments to get status
                 let status = 'pending';
+                let roomId = null;
+                let isVideoCallActive = false;
                 if (doctor) {
                     const docAppt = doctor.appointments.find(a => a.patientId.toString() === patient._id.toString() && a.date === appt.date && a.startTime === appt.startTime && a.endTime === appt.endTime);
-                    if (docAppt) status = docAppt.status;
+                    if (docAppt) {
+                        status = docAppt.status;
+                        roomId = docAppt.roomId;
+                        isVideoCallActive = docAppt.isVideoCallActive;
+                    }
                 }
                 return {
                     doctor: doctor ? {
@@ -24,12 +30,16 @@ router.get('/bookedAppointments', requirePatientAuth, async (req, res) => {
                         speciality: doctor.speciality,
                         location: doctor.location,
                         phoneNumber: doctor.phoneNumber,
-                        email: doctor.email
+                        email: doctor.email,
+                        _id: doctor._id
                     } : {},
                     date: appt.date,
                     startTime: appt.startTime,
                     endTime: appt.endTime,
-                    status
+                    status,
+                    roomId,
+                    isVideoCallActive,
+                    _id: appt._id
                 };
             })
         );
